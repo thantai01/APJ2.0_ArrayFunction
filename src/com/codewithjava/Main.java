@@ -17,16 +17,28 @@ public class Main {
         System.out.println("Let's choose an action which you want : ");
         System.out.println("1. Reverse your Array ");
         System.out.println("2. Find an items in array ");
-        System.out.println("3. Find max value in array ");
+        System.out.println("3. Find item with max value property in array ");
+        System.out.println("4. Find and delete item in array ");
+
         int choose = sc.nextInt();
-        switch (choose){
-            case 1: arrayReverse(array);break;
+        switch (choose) {
+            case 1:
+                arrayReverse(array);
+                break;
             case 2:
                 System.out.print("Which one?: ");
                 int item = sc.nextInt();
-                arrayFindItem(array,item);break;
-            case 3:arrayMax(array); break;
-
+                arrayFindItem(array, item);
+                break;
+            case 3:
+                arrayMax(array);
+                break;
+            case 4:
+                System.out.print("Which you want to kill?: ");
+                int item2 = sc.nextInt();
+                int[] newArray = deleteItem(array,indexDeleteItem(array,item2));
+                System.out.println(Arrays.toString(newArray));
+                break;
 
         }
     }
@@ -49,18 +61,18 @@ public class Main {
     }
 
     private static void arrayReverse(int[] array) {
-        for (int i = 0; i< array.length/2;i++){
+        for (int i = 0; i < array.length / 2; i++) {
             int temp = array[i];
-            array[i] = array[array.length-1-i];
-            array[array.length-1-i] = temp;
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
         }
-        System.out.println("New array "+Arrays.toString(array));
+        System.out.println("New array " + Arrays.toString(array));
     }
 
-    private static void arrayFindItem(int[] array, int item){
+    private static void arrayFindItem(int[] array, int item) {
         boolean isItems = false;
         int i = 0;
-        for (;i < array.length;i++) {
+        for (; i < array.length; i++) {
             if (item == array[i]) {
                 isItems = true;
                 break;
@@ -71,17 +83,36 @@ public class Main {
         } else System.out.println("Item not found");
     }
 
-    private static void arrayMax(int[] array){
+    private static void arrayMax(int[] array) {
         int max = array[0];
         int index = 0;
-        for (int i = 0;i<array.length;i++) {
-            if(array[i]>max) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
                 max = array[i];
                 index = i + 1;
             }
         }
-        System.out.println("The largest value in the array is " + max +" at position " + index);
+        System.out.println("The largest value in the array is " + max + " at position " + index);
     }
 
+    static int indexDeleteItem(int[] array, int item2) {
+        int index = -1;
+        for (int i = 0; i <array.length;i++) {
+            if(item2 == array[i]) {
+                index = i;
+            }
+        }
+        return index;
+    }
+    static int[] deleteItem(int[] array, int index) {
+        int[] newArray = new int[array.length - 1];
+        for (int i =0; i < index; i++) {
+            newArray[i] = array[i];
+        }
+        for (int i = index +1; i< array.length; i++) {
+            newArray[i-1] = array[i];
+        }
+        return newArray;
+    }
 
 }
