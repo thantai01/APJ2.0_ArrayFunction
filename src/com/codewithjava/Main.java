@@ -17,8 +17,10 @@ public class Main {
         System.out.println("Let's choose an action which you want : ");
         System.out.println("1. Reverse your Array ");
         System.out.println("2. Find an items in array ");
-        System.out.println("3. Find item with max value property in array ");
+        System.out.println("3. Find largest item in array ");
         System.out.println("4. Find and delete item in array ");
+        System.out.println("5. Insert new item to array ");
+
 
         int choose = sc.nextInt();
         switch (choose) {
@@ -39,6 +41,13 @@ public class Main {
                 int[] newArray = deleteItem(array,indexDeleteItem(array,item2));
                 System.out.println(Arrays.toString(newArray));
                 break;
+            case 5:
+                System.out.println("New item :? ");
+                int item3 = sc.nextInt();
+                System.out.println("Add to where?? ");
+                int index3 = sc.nextInt();
+                int[] newArray2 = insertItem(array,item3,index3);
+                System.out.println("Your new array: "+Arrays.toString(newArray2));
 
         }
     }
@@ -114,5 +123,22 @@ public class Main {
         }
         return newArray;
     }
+
+    static int[] insertItem(int[] array, int item3,int index3) {
+        int[] newArray = new int[array.length + 1];
+        for(int i = 0;i < index3; i++) {
+            newArray[i] = array[i];
+            newArray[index3] = item3;
+        }
+        for (int i = index3+1; i< newArray.length;i++) {
+            newArray[i] = array[i-1];
+        }
+
+        return newArray;
+    }
+
+
+
+
 
 }
